@@ -1,7 +1,3 @@
 tienda\ProjectConfig.class
-tienda\service\CategoriaService.class
-tienda\repository\CategoriaRepository.class
+tienda\config\FirebaseConfig.class
 tienda\TiendaApplication.class
-tienda\service\FirebaseStorageService.class
-tienda\controller\CategoriaController.class
-tienda\domain\Categoria.class
