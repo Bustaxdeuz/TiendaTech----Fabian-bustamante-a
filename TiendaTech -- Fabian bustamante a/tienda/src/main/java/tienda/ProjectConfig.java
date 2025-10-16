@@ -20,12 +20,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.thymeleaf.spring6.templateresolver.SpringResourceTemplateResolver;
-import org.thymeleaf.templatemode.TemplateMode; 
+import org.thymeleaf.templatemode.TemplateMode;
 
 @Configuration
 public class ProjectConfig implements WebMvcConfigurer {
 
-    /* --------------------------- CONTROLADORES DE VISTA --------------------------- */
+    /* Los siguiente métodos son para implementar el tema de seguridad dentro del proyecto */
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("index");
@@ -36,7 +36,7 @@ public class ProjectConfig implements WebMvcConfigurer {
         registry.addViewController("/registro/nuevo").setViewName("/registro/nuevo");
     }
 
-    /* --------------------------- CONFIGURACIÓN DE THYMELEAF --------------------------- */
+    /* El siguiente método se utilizar para publicar en la nube, independientemente  */
     @Bean
     public SpringResourceTemplateResolver templateResolver_0() {
         SpringResourceTemplateResolver resolver = new SpringResourceTemplateResolver();
@@ -48,7 +48,6 @@ public class ProjectConfig implements WebMvcConfigurer {
         return resolver;
     }
 
-    /* --------------------------- CONFIGURACIÓN DE INTERNACIONALIZACIÓN --------------------------- */
     @Bean
     public LocaleResolver localeResolver() {
         var slr = new SessionLocaleResolver();
@@ -69,17 +68,16 @@ public class ProjectConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registro) {
         registro.addInterceptor(localeChangeInterceptor());
     }
-
-    /* --------------------------- CONFIGURACIÓN DE MENSAJES --------------------------- */
+    
+    //Bean para poder acceder a los messages.properties en código...
     @Bean("messageSource")
     public MessageSource messageSource() {
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-        messageSource.setBasenames("messages");
+        messageSource.setBasename("messages");
         messageSource.setDefaultEncoding("UTF-8");
         return messageSource;
     }
-
-    /* --------------------------- CONFIGURACIÓN DE FIREBASE STORAGE --------------------------- */
+    
     @Value("${firebase.json.path}")
     private String jsonPath;
 
@@ -91,10 +89,8 @@ public class ProjectConfig implements WebMvcConfigurer {
         ClassPathResource resource = new ClassPathResource(jsonPath + File.separator + jsonFile);
         try (InputStream inputStream = resource.getInputStream()) {
             GoogleCredentials credentials = GoogleCredentials.fromStream(inputStream);
-            return StorageOptions.newBuilder()
-                    .setCredentials(credentials)
-                    .build()
-                    .getService();
+            return StorageOptions.newBuilder().setCredentials(credentials).build().getService();
         }
     }
+
 }
