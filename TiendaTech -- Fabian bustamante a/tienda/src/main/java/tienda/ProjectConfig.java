@@ -1,12 +1,11 @@
 package tienda;
 
-import com.google.auth.oauth2.GoogleCredentials;
-import com.google.cloud.storage.Storage;
-import com.google.cloud.storage.StorageOptions;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Locale;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -21,6 +20,10 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.thymeleaf.spring6.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.templatemode.TemplateMode;
+
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.cloud.storage.Storage;
+import com.google.cloud.storage.StorageOptions;
 
 @Configuration
 public class ProjectConfig implements WebMvcConfigurer {
@@ -86,9 +89,18 @@ public class ProjectConfig implements WebMvcConfigurer {
 
     @Bean
     public Storage storage() throws IOException {
+        // Intentar cargar desde classpath primero
         ClassPathResource resource = new ClassPathResource(jsonPath + File.separator + jsonFile);
-        try (InputStream inputStream = resource.getInputStream()) {
-            GoogleCredentials credentials = GoogleCredentials.fromStream(inputStream);
+        if (resource.exists()) {
+            try (InputStream inputStream = resource.getInputStream()) {
+                GoogleCredentials credentials = GoogleCredentials.fromStream(inputStream);
+                return StorageOptions.newBuilder().setCredentials(credentials).build().getService();
+            }
+        }
+        // Fallback: intentar cargar desde ruta del filesystem (props pueden usar ${user.dir})
+        String fsPath = jsonPath + File.separator + jsonFile;
+        try (FileInputStream fis = new FileInputStream(fsPath)) {
+            GoogleCredentials credentials = GoogleCredentials.fromStream(fis);
             return StorageOptions.newBuilder().setCredentials(credentials).build().getService();
         }
     }

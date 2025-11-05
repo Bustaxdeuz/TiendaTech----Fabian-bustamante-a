@@ -24,14 +24,11 @@
                         <ul class="navbar-nav">
                             <li class="nav-item px-2"><a class="nav-link" th:href="@{/categoria/listado}">[[#{plantilla.categorias}]]</a></li>
                             <li class="nav-item px-2"><a class="nav-link" th:href="@{/producto/listado}">[[#{plantilla.productos}]]</a></li>
-                            <li class="nav-item px-2"><a class="nav-link" th:href="@{/consultas/ampliada}">
-                                <i class="fas fa-chart-bar"></i> Consulta Ampliada</a></li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" 
                                    aria-expanded="false">[[#{plantilla.extras}]]</a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" th:href="@{/pruebas/listado}">[[#{plantilla.asociaciones}]]</a></li>
-                                    <li><a class="dropdown-item" th:href="@{/pruebas/listado2}">[[#{plantilla.consultas}]]</a></li>
+                                <ul class="dropdown-menu">                                    
+                                    <li><a class="dropdown-item" th:href="@{/consultas/listado}">[[#{plantilla.consultas}]]</a></li>
                                 </ul>
                             </li>
                             <li class="nav-item dropdown">
@@ -85,8 +82,8 @@
         <footer th:fragment="footer" class="p-2 mt-5 bg-info text-white">
             <p class="lead text-center">[[#{plantilla.derechos}]] &COPY;</p>
         </footer>
-        
-<section th:fragment="mostrarToast">
+
+        <section th:fragment="mostrarToast">
             <div aria-live="polite" aria-atomic="true" 
                  class="position-fixed top-50 start-50 translate-middle" style="z-index: 1080;">                
                 <div th:if="${error}" class="toast show"

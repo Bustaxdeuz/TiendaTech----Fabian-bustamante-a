@@ -1,10 +1,12 @@
 C:\Users\Fabia\Desktop\TiendaTech----Fabian-bustamante-a\TiendaTech -- Fabian bustamante a\tienda\src\main\java\tienda\config\FirebaseConfig.java
 C:\Users\Fabia\Desktop\TiendaTech----Fabian-bustamante-a\TiendaTech -- Fabian bustamante a\tienda\src\main\java\tienda\controller\CategoriaController.java
+C:\Users\Fabia\Desktop\TiendaTech----Fabian-bustamante-a\TiendaTech -- Fabian bustamante a\tienda\src\main\java\tienda\controller\ConsultaController.java
 C:\Users\Fabia\Desktop\TiendaTech----Fabian-bustamante-a\TiendaTech -- Fabian bustamante a\tienda\src\main\java\tienda\controller\IndexController.java
 C:\Users\Fabia\Desktop\TiendaTech----Fabian-bustamante-a\TiendaTech -- Fabian bustamante a\tienda\src\main\java\tienda\controller\ProductoController.java
 C:\Users\Fabia\Desktop\TiendaTech----Fabian-bustamante-a\TiendaTech -- Fabian bustamante a\tienda\src\main\java\tienda\domain\Categoria.java
 C:\Users\Fabia\Desktop\TiendaTech----Fabian-bustamante-a\TiendaTech -- Fabian bustamante a\tienda\src\main\java\tienda\domain\Producto.java
 C:\Users\Fabia\Desktop\TiendaTech----Fabian-bustamante-a\TiendaTech -- Fabian bustamante a\tienda\src\main\java\tienda\domain\ProductoConsultaAmpliada.java
+C:\Users\Fabia\Desktop\TiendaTech----Fabian-bustamante-a\TiendaTech -- Fabian bustamante a\tienda\src\main\java\tienda\domain\ProductoDetalleAmpliada.java
 C:\Users\Fabia\Desktop\TiendaTech----Fabian-bustamante-a\TiendaTech -- Fabian bustamante a\tienda\src\main\java\tienda\ProjectConfig.java
 C:\Users\Fabia\Desktop\TiendaTech----Fabian-bustamante-a\TiendaTech -- Fabian bustamante a\tienda\src\main\java\tienda\repository\CategoriaRepository.java
 C:\Users\Fabia\Desktop\TiendaTech----Fabian-bustamante-a\TiendaTech -- Fabian bustamante a\tienda\src\main\java\tienda\repository\ProductoRepository.java
