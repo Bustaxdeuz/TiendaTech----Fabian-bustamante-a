@@ -22,5 +22,30 @@ public interface ProductoRepository extends JpaRepository<Producto, Integer> {
             value = "SELECT * FROM producto p WHERE p.precio BETWEEN :precioInf AND :precioSup ORDER BY p.precio ASC")
     public List<Producto> consultaSQL(@Param("precioInf") double precioInf, @Param("precioSup") double precioSup);
 
+    // Consulta ampliada de productos con estadísticas detalladas
+    @Query(nativeQuery = true, value = 
+        "SELECT " +
+        "    p.id_producto AS idProducto, " +
+        "    p.descripcion AS descripcion, " +
+        "    p.detalle AS detalle, " +
+        "    p.precio AS precio, " +
+        "    p.existencias AS existencias, " +
+        "    p.ruta_imagen AS rutaImagen, " +
+        "    p.activo AS activo, " +
+        "    COALESCE(p.id_categoria, 0) AS idCategoria, " +
+        "    COALESCE(c.descripcion, 'Sin categoría') AS nombreCategoria, " +
+        "    (p.precio * p.existencias) AS valorTotalInventario, " +
+        "    CASE " +
+        "        WHEN p.existencias = 0 THEN 'Agotado' " +
+        "        WHEN p.existencias < 10 THEN 'Stock Bajo' " +
+        "        ELSE 'Disponible' " +
+        "    END AS estadoStock, " +
+        "    COALESCE((SELECT COUNT(*) FROM producto p2 WHERE (p.id_categoria IS NULL AND p2.id_categoria IS NULL) OR p2.id_categoria = p.id_categoria), 0) AS productosEnCategoria, " +
+        "    COALESCE((SELECT AVG(p3.precio) FROM producto p3 WHERE (p.id_categoria IS NULL AND p3.id_categoria IS NULL) OR p3.id_categoria = p.id_categoria), 0) AS precioPromedioCategoria " +
+        "FROM producto p " +
+        "LEFT JOIN categoria c ON p.id_categoria = c.id_categoria " +
+        "ORDER BY p.descripcion ASC")
+    List<Object[]> consultaAmpliadaProductos();
+
 }
 

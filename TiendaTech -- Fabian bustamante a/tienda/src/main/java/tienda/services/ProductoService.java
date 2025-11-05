@@ -1,8 +1,11 @@
 package tienda.services;
 
 import tienda.domain.Producto;
+import tienda.domain.ProductoDetalleAmpliada;
 import tienda.repository.ProductoRepository;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -78,5 +81,33 @@ public class ProductoService {
     @Transactional(readOnly = true)
     public List<Producto> consultaSQL(double precioInf, double precioSup) {
         return productoRepository.consultaSQL(precioInf, precioSup);
+    }
+    
+    @Transactional(readOnly = true)
+    public List<ProductoDetalleAmpliada> consultaAmpliadaProductos() {
+        List<Object[]> resultados = productoRepository.consultaAmpliadaProductos();
+        List<ProductoDetalleAmpliada> productosAmpliados = new ArrayList<>();
+        
+        for (Object[] fila : resultados) {
+            ProductoDetalleAmpliada producto = new ProductoDetalleAmpliada();
+            
+            producto.setIdProducto(fila[0] != null ? ((Number) fila[0]).intValue() : null);
+            producto.setDescripcion(fila[1] != null ? (String) fila[1] : "");
+            producto.setDetalle(fila[2] != null ? (String) fila[2] : null);
+            producto.setPrecio(fila[3] != null ? (BigDecimal) fila[3] : BigDecimal.ZERO);
+            producto.setExistencias(fila[4] != null ? ((Number) fila[4]).intValue() : 0);
+            producto.setRutaImagen(fila[5] != null ? (String) fila[5] : null);
+            producto.setActivo(fila[6] != null ? (Boolean) fila[6] : false);
+            producto.setIdCategoria(fila[7] != null ? ((Number) fila[7]).intValue() : 0);
+            producto.setNombreCategoria(fila[8] != null ? (String) fila[8] : "Sin categoría");
+            producto.setValorTotalInventario(fila[9] != null ? (BigDecimal) fila[9] : BigDecimal.ZERO);
+            producto.setEstadoStock(fila[10] != null ? (String) fila[10] : "Desconocido");
+            producto.setProductosEnCategoria(fila[11] != null ? ((Number) fila[11]).intValue() : 0);
+            producto.setPrecioPromedioCategoria(fila[12] != null ? (BigDecimal) fila[12] : BigDecimal.ZERO);
+            
+            productosAmpliados.add(producto);
+        }
+        
+        return productosAmpliados;
     }
 }

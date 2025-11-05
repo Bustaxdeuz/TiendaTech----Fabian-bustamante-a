@@ -70,7 +70,21 @@
                 <div th:replace="~{consultas/fragmentos :: formularioConsulta('/consultas/consultaDerivada', #{pruebas.ampliadas}, 'primary')}"></div>
                 <div th:replace="~{consultas/fragmentos :: formularioConsulta('/consultas/consultaJPQL', #{pruebas.jpql}, 'warning')}"></div>
                 <div th:replace="~{consultas/fragmentos :: formularioConsulta('/consultas/consultaSQL', #{pruebas.nativo}, 'success')}"></div>
-                <div><div class="card">Acá va su consulta de la tarea #2</div></div>
+                <div>
+                    <div class="card p-2">
+                        <div class="card-header text-center text-white bg-info">
+                            <h5><i class="fas fa-boxes"></i> Consulta Ampliada de Productos</h5>
+                        </div>
+                        <div class="card-body text-center">
+                            <p class="card-text">Vista detallada de todos los productos con estadísticas completas</p>
+                        </div>
+                        <div class="card-footer text-center">
+                            <a th:href="@{/consultas/ampliada/productos}" class="btn btn-info text-white">
+                                <i class="fas fa-search"></i> Ver Consulta Ampliada
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
