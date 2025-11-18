@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{general/fragmentos :: head}"/>
+    <body>
+        <header th:replace="~{general/fragmentos :: header}"/>
+        <div class="container my-5">
+            <div class="card">
+                <div class="card-header bg-info text-white text-center">
+                    <h2>[[#{registro.recordar.us}]]</h2>
+                </div>
+                <div class="card-body">
+                    <p class="mb-0">
+                        Esta vista sirve como recordatorio temporal de credenciales. Sustituya
+                        el contenido por el formulario que conecte con su flujo real.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <footer th:replace="~{general/fragmentos :: footer}"/>
+    </body>
+</html>
+

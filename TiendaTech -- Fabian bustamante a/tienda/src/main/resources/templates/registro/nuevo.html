@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{general/fragmentos :: head}"/>
+    <body>
+        <header th:replace="~{general/fragmentos :: header}"/>
+        <div class="container my-5">
+            <div class="card">
+                <div class="card-header bg-primary text-white text-center">
+                    <h2>[[#{usuario.agregar}]]</h2>
+                </div>
+                <div class="card-body">
+                    <p class="mb-0">
+                        Este es un marcador de posición para el flujo de registro. Integre su
+                        formulario real de creación de usuarios aquí.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <footer th:replace="~{general/fragmentos :: footer}"/>
+    </body>
+</html>
+
